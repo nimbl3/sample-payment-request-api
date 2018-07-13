@@ -22,3 +22,6 @@ yarn-error.log*
 
 # RubyMine
 /.idea/
+
+# CSS
+src/**/*.css
