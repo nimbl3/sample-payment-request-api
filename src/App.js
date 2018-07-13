@@ -11,7 +11,7 @@ class App extends Component {
   }
 
   handleClick(event) {
-    const payment = new Payment();
+    const payment = new Payment(100);
 
     payment.create();
     payment.pay();

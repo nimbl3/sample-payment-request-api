@@ -11,6 +11,32 @@ const supportedPaymentMethods = [
   creditCardPaymentMethod
 ];
 
+// Define shipping option here.
+const shippingOptions = [
+  {
+    id: 'economy',
+    label: 'Economy Shipping (5-7 Days)',
+    amount: {
+      currency: 'THB',
+      value: '0',
+    },
+  }, {
+    id: 'express',
+    label: 'Express Shipping (2-3 Days)',
+    amount: {
+      currency: 'THB',
+      value: '5',
+    },
+  }, {
+    id: 'next-day',
+    label: 'Next Day Delivery',
+    amount: {
+      currency: 'THB',
+      value: '12',
+    },
+  },
+]
+
 // Define payment detail here.
 const paymentDetails = {
   total: {
@@ -20,19 +46,20 @@ const paymentDetails = {
       value: 0
     }
   },
-  displayItems: []
+  shippingOptions
 };
 
 // Define payment option here.
 const options = {
-  requestPayerName: false,
-  requestPayerPhone: false,
-  requestPayerEmail: false,
-  requestShipping: false
+  requestPayerName: true,
+  requestPayerPhone: true,
+  requestPayerEmail: true,
+  requestShipping: true
 };
 
 export {
   supportedPaymentMethods,
   paymentDetails,
-  options
+  options,
+  shippingOptions
 };
