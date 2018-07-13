@@ -4,7 +4,7 @@ import './index.css';
 
 const avatarURL = 'https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png';
 
-const OrderSummary = ({ onCheckout }) => (
+const OrderSummary = ({ onCheckout, price }) => (
   <aside className="order-summary">
     <figure className="order-summary__profile">
       <img className="order-summary__profile-picture" src={avatarURL} alt="User profile picture"/>
@@ -16,7 +16,7 @@ const OrderSummary = ({ onCheckout }) => (
         <tr>
           <td className="order-summary__order-column order-summary__order-column--total">Total</td>
           <td className="order-summary__order-column order-summary__order-column--total order-summary__order-column--price">
-            1500 THB
+            {price} THB
           </td>
         </tr>
       </tfoot>
@@ -26,7 +26,7 @@ const OrderSummary = ({ onCheckout }) => (
         </tr>
         <tr>
           <td className="order-summary__order-column">30 mins photo shooting</td>
-          <td className="order-summary__order-column order-summary__order-column--price">1500 THB</td>
+          <td className="order-summary__order-column order-summary__order-column--price">{price} THB</td>
         </tr>
         <tr>
           <td className="order-summary__order-column">5 high resolution photos*</td>
