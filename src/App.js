@@ -1,25 +1,13 @@
 import React, { Component } from 'react';
 
-import Payment from './adapters/payment';
+import OrderSummary from './components/OrderSummary';
+
 import './App.css';
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleClick = this.handleClick.bind(this);
-  }
-
-  handleClick(event) {
-    const payment = new Payment(100);
-
-    payment.create();
-    payment.pay();
-  }
-
   render() {
     return (
-      <button type="button" onClick={this.handleClick}>Pay</button>
+      <OrderSummary/>
     );
   }
 }
