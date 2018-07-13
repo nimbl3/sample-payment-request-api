@@ -1,23 +1,28 @@
 import {
   supportedPaymentMethods,
   paymentDetails,
-  options
+  options,
+  shippingOptions
 } from './config';
 
 class Payment {
-  constructor() {
+  constructor(subtotal) {
     this.payment = null;
-    this.supportedPaymentMethods = supportedPaymentMethods;
     this.paymentDetails = paymentDetails;
-    this.options = options;
+    this.paymentDetails.total.amount.value = subtotal;
+    this.shippingOptions = shippingOptions;
+    this.subtotal = subtotal;
   }
 
   create() {
     this.payment = new window.PaymentRequest(
-      this.supportedPaymentMethods,
+      supportedPaymentMethods,
       this.paymentDetails,
-      this.options
+      options
     );
+
+    this._bindShippingAddressChange()
+    this._bindShippingOptionChange()
   }
 
   pay() {
@@ -28,6 +33,47 @@ class Payment {
       .catch(error => {
         console.error('Payment Request API error: ', error);
       });
+  }
+
+  _bindShippingAddressChange() {
+    this.payment.addEventListener('shippingaddresschange', (event) => {
+      event.updateWith(this.paymentDetails)
+    })
+  }
+
+  _bindShippingOptionChange() {
+    this.payment.addEventListener('shippingoptionchange', (event) => {
+      const paymentRequestInstance = event.target;
+      const shippingSelectedId = paymentRequestInstance.shippingOption;
+
+      event.updateWith(this._buildPaymentDetails(shippingSelectedId))
+    })
+  }
+
+  _buildPaymentDetails(shippingSelectedId) {
+    let selectedOption = null
+    const shippingOptions = this.shippingOptions.map((option) => {
+      if (option.id === shippingSelectedId) {
+        selectedOption = option
+      }
+      return { selected:  option.id === shippingSelectedId, ...option }
+    })
+
+    const displayItems = [
+      selectedOption
+    ]
+
+    return {
+      total: {
+        label: 'Total',
+        amount: {
+          currency: 'THB',
+          value: this.subtotal + (+selectedOption.amount.value)
+        }
+      },
+      displayItems,
+      shippingOptions
+    }
   }
 }
 

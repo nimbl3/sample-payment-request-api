@@ -4,7 +4,7 @@ import './index.css';
 
 const avatarURL = 'https://cdn.pixabay.com/photo/2016/03/31/19/58/avatar-1295429_960_720.png';
 
-const OrderSummary = () => (
+const OrderSummary = ({ onCheckout }) => (
   <aside className="order-summary">
     <figure className="order-summary__profile">
       <img className="order-summary__profile-picture" src={avatarURL} alt="User profile picture"/>
@@ -47,7 +47,7 @@ const OrderSummary = () => (
         </tr>
       </tbody>
     </table>
-    <button type="button" className="btn">Checkout & Pay</button>
+    <button type="button" className="btn" onClick={onCheckout}>Checkout & Pay</button>
   </aside>
 );
 
