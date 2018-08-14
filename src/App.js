@@ -1,18 +1,39 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+
+import Payment from './adapters/payment';
+import OrderSummary from './components/OrderSummary';
+import PackageOption from './components/PackageOption';
+
 import './App.css';
 
 class App extends Component {
+  constructor() {
+    super()
+
+    this.state = {
+      packagePrice: 0
+    }
+  }
+
+  handlePackageClick(price) {
+    this.setState({
+      packagePrice: price
+    })
+  }
+
+  handleCheckout() {
+    const payment = new Payment(this.state.packagePrice);
+  
+    payment.create();
+    payment.pay();
+  }
+    
   render() {
+    const prices = [1500, 2500, 3500, 8000]
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container">
+        { prices.map((price) => (<PackageOption onClick={this.handlePackageClick.bind(this)} active={price === this.state.packagePrice} price={price} />)) }
+        <OrderSummary price={this.state.packagePrice} onCheckout={()=>this.handleCheckout()}/>
       </div>
     );
   }

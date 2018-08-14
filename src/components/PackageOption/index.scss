@@ -1,0 +1,56 @@
+.package-option {
+    width: 220px;
+    font-size: 0.8rem;
+    border-style: hidden; 
+    border-collapse: collapse;
+    border-radius: 6px;
+    box-shadow: 0 0 0 1px #D5D8E2;
+    margin-right: 2rem;
+    cursor: pointer;
+    
+
+    &__header {
+        border-bottom: 1px solid #D5D8E2;
+    }
+
+    &__column {
+        padding: 14px;
+        &--name {
+            font-weight: 600;
+        }
+
+        &--name-sub-header {
+            padding-top: 5px;
+            font-weight: 300;
+            font-size: 0.8rem;
+            color: rgb(158, 160, 165);     
+        }
+
+        &--price {
+            font-weight: 600;
+            text-align: right;
+        }
+
+        &--description {
+            padding-top: 1.3rem;
+
+            &--item:before {
+                padding-right: 1.5rem;
+                content: '•';
+            }
+
+            &--item:not(:first-child) {
+                padding-top: 0.8rem;
+            }
+        }
+    }
+
+    &--active {
+        width: 220px;
+        font-size: 0.8rem;
+        border-style: hidden; 
+        border-collapse: collapse;
+        border-radius: 6px;
+        box-shadow: 0 0 0 1px #00DBAD;
+    }
+}
